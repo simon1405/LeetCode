@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+Select s1.Score , s3.Rank
+from Scores as s1 
+left join 
+(Select Score, @Rank:=@Rank+1 as Rank
+        From (Select Distinct Score From Scores Order by Score DESC) as s2, (Select @Rank:=0) var) as s3 
+on s1.Score = s3.Score
+order by S1.Score desc;
